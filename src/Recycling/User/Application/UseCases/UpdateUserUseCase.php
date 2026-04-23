@@ -16,7 +16,7 @@ class UpdateUserUseCase
 {
     public function __construct(private UserRepositoryPort $repository) {}
 
-    public function execute(CreateUserDTO $dto): User
+    public function execute(CreateUserDTOs $dto): User
     {
         $id = new UserId($dto->getId());
 
