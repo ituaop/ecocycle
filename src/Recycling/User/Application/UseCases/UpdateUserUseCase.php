@@ -9,6 +9,7 @@ use Src\Recycling\User\Domain\Entities\User;
 use Src\Recycling\User\Domain\ValueObjects\UserEmail;
 use Src\Recycling\User\Domain\ValueObjects\UserId;
 use Src\Recycling\User\Domain\ValueObjects\UserLevel;
+use Src\Recycling\User\Domain\ValueObjects\UserPassword;
 use Src\Recycling\User\Domain\ValueObjects\UserTotalPoints;
 use Src\Recycling\User\Domain\ValueObjects\UserUserName;
 
@@ -16,7 +17,7 @@ class UpdateUserUseCase
 {
     public function __construct(private UserRepositoryPort $repository) {}
 
-    public function execute(CreateUserDTOs $dto): User
+    public function execute(CreateUserDTO $dto): User
     {
         $id = new UserId($dto->getId());
 
@@ -28,6 +29,7 @@ class UpdateUserUseCase
             $id,
             new UserUserName($dto->getUsername()),
             new UserEmail($dto->getEmail()),
+            new UserPassword($dto->getPassword()),
             new UserLevel($dto->getLevel()),
             new UserTotalPoints($dto->getTotalPoints())
         );

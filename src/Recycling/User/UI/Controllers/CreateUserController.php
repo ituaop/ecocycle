@@ -15,10 +15,11 @@ class CreateUserController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $dto = new CreateUserDTOs(
+            $dto = new CreateUserDTO(
                 $request->input('id'),
                 $request->input('username'),
                 $request->input('email'),
+                $request->input('password'),
                 $request->input('level', 'BEGINNER'),
                 (int) $request->input('total_points', 0)
             );

@@ -15,10 +15,11 @@ class UpdateUserController extends Controller
     public function __invoke(Request $request, string $id): JsonResponse
     {
         try {
-            $dto = new CreateUserDTOs(
+            $dto = new CreateUserDTO(
                 $id,
                 $request->input('username'),
                 $request->input('email'),
+                $request->input('password'),
                 $request->input('level'),
                 (int) $request->input('total_points')
             );
@@ -32,6 +33,7 @@ class UpdateUserController extends Controller
                     'id'           => $user->getIdValue(),
                     'username'     => $user->getUsernameValue(),
                     'email'        => $user->getEmailValue(),
+                    'password'     => $user->getPasswordValue(),
                     'level'        => $user->getLevelValue(),
                     'total_points' => $user->getTotalPointsValue(),
                 ],

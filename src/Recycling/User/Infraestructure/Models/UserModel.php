@@ -15,6 +15,7 @@ class UserModel extends Model
         'id',
         'username',
         'email',
+        'password',
         'level',
         'total_points',
     ];

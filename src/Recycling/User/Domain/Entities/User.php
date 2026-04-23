@@ -5,6 +5,7 @@ namespace Src\Recycling\User\Domain\Entities;
 use Src\Recycling\User\Domain\ValueObjects\UserEmail;
 use Src\Recycling\User\Domain\ValueObjects\UserId;
 use Src\Recycling\User\Domain\ValueObjects\UserLevel;
+use Src\Recycling\User\Domain\ValueObjects\UserPassword;
 use Src\Recycling\User\Domain\ValueObjects\UserTotalPoints;
 use Src\Recycling\User\Domain\ValueObjects\UserUserName;
 
@@ -13,6 +14,7 @@ class User
     private UserId        $id;
     private UserUserName  $username;
     private UserEmail     $email;
+    private UserPassword $password;
     private UserLevel     $level;
     private UserTotalPoints $totalPoints;
 
@@ -20,12 +22,14 @@ class User
         UserId        $id,
         UserUserName  $username,
         UserEmail     $email,
+        UserPassword $password,
         UserLevel     $level,
         UserTotalPoints $totalPoints
     ) {
         $this->id          = $id;
         $this->username    = $username;
         $this->email       = $email;
+        $this->password    = $password;
         $this->level       = $level;
         $this->totalPoints = $totalPoints;
     }
@@ -38,6 +42,9 @@ class User
 
     public function getEmail(): UserEmail               { return $this->email; }
     public function getEmailValue(): string             { return $this->email->value(); }
+
+    public function getPassword(): UserPassword         { return $this->password; }
+    public function getPasswordValue(): string          { return $this->password->value(); }
 
     public function getLevel(): UserLevel               { return $this->level; }
     public function getLevelValue(): string             { return $this->level->value(); }
