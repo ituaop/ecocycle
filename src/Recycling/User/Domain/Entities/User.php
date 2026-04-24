@@ -5,6 +5,7 @@ namespace Src\Recycling\User\Domain\Entities;
 use Src\Recycling\User\Domain\ValueObjects\UserEmail;
 use Src\Recycling\User\Domain\ValueObjects\UserId;
 use Src\Recycling\User\Domain\ValueObjects\UserLevel;
+use Src\Recycling\User\Domain\ValueObjects\UserName;
 use Src\Recycling\User\Domain\ValueObjects\UserPassword;
 use Src\Recycling\User\Domain\ValueObjects\UserTotalPoints;
 use Src\Recycling\User\Domain\ValueObjects\UserUserName;
@@ -13,6 +14,7 @@ class User
 {
     private UserId        $id;
     private UserUserName  $username;
+    private UserName     $name;
     private UserEmail     $email;
     private UserPassword $password;
     private UserLevel     $level;
@@ -21,6 +23,7 @@ class User
     public function __construct(
         UserId        $id,
         UserUserName  $username,
+        UserName        $name,
         UserEmail     $email,
         UserPassword $password,
         UserLevel     $level,
@@ -29,6 +32,7 @@ class User
         $this->id          = $id;
         $this->username    = $username;
         $this->email       = $email;
+        $this->name     = $name;
         $this->password    = $password;
         $this->level       = $level;
         $this->totalPoints = $totalPoints;
@@ -37,6 +41,9 @@ class User
     public function getId(): UserId                     { return $this->id; }
     public function getIdValue(): string                { return $this->id->value(); }
 
+    public function getName(): UserName        { return $this->name; }
+    public function getNameValue(): string     { return $this->name->value(); }
+
     public function getUsername(): UserUserName         { return $this->username; }
     public function getUsernameValue(): string          { return $this->username->value(); }
 
@@ -44,11 +51,16 @@ class User
     public function getEmailValue(): string             { return $this->email->value(); }
 
     public function getPassword(): UserPassword         { return $this->password; }
-    public function getPasswordValue(): string          { return $this->password->value(); }
+    public function getPasswordHash(): string   { return $this->password->value(); }
 
     public function getLevel(): UserLevel               { return $this->level; }
     public function getLevelValue(): string             { return $this->level->value(); }
 
     public function getTotalPoints(): UserTotalPoints   { return $this->totalPoints; }
     public function getTotalPointsValue(): int          { return $this->totalPoints->value(); }
+
+    public function verifyPassword(string $plain): bool
+    {
+        return $this->password->verify($plain);
+    }
 }

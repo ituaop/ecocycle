@@ -5,15 +5,16 @@ namespace Src\Recycling\User\Infraestructure\Traits;
 use Src\Recycling\User\Domain\Entities\User;
 use Src\Recycling\User\Infraestructure\Models\UserModel;
 
-trait CreateUserTrait
+trait RegisterUserTrait
 {
-    public function create(User $user): void
+    public function registerUser(User $user): void
     {
         UserModel::create([
             'id'           => $user->getIdValue(),
+            'name'         => $user->getNameValue(),
             'username'     => $user->getUsernameValue(),
             'email'        => $user->getEmailValue(),
-            'password'     => $user->getPasswordValue(),
+            'password'     => $user->getPasswordHash(),
             'level'        => $user->getLevelValue(),
             'total_points' => $user->getTotalPointsValue(),
         ]);

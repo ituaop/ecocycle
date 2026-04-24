@@ -58,7 +58,7 @@ export default function Dashboard({ auth, stats }: DashboardProps) {
     // Fallback demo data if stats not provided
     const s = stats ?? {
         totalActions: 24,
-        totalPoints: user.total_points ?? 600,
+        totalPoints: user.total_points ?? 800,
         level,
         activeCollectionPoints: 12,
         recentActions: [

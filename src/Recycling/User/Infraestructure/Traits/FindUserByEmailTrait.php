@@ -10,7 +10,7 @@ trait FindUserByEmailTrait
 {
     public function findByEmail(string $email): ?User
     {
-        $model = UserModel::where('email', $email)->first();
+        $model = UserModel::where('email', strtolower(trim($email)))->first();
 
         return $model ? UserHydrator::toDomain($model) : null;
     }
