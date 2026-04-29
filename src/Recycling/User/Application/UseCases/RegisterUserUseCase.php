@@ -5,7 +5,7 @@ namespace Src\Recycling\User\Application\UseCases;
 use Exception;
 use Illuminate\Support\Str;
 use Src\Recycling\User\Application\DTOs\RegisterUserDTO;
-use Src\Recycling\User\Application\Ports\AuthUserRepositoryPort;
+use Src\Recycling\User\Application\Ports\UserRepositoryPort;
 use Src\Recycling\User\Domain\Entities\UserWithPassword;
 use Src\Recycling\User\Domain\ValueObjects\UserEmail;
 use Src\Recycling\User\Domain\ValueObjects\UserId;

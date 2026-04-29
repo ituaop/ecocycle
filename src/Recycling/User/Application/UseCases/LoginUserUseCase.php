@@ -4,7 +4,7 @@ namespace Src\Recycling\User\Application\UseCases;
 
 use Exception;
 use Src\Recycling\User\Application\DTOs\LoginUserDTO;
-use Src\Recycling\User\Application\Ports\AuthUserRepositoryPort;
+use Src\Recycling\User\Application\Ports\UserRepositoryPort;
 use Src\Recycling\User\Domain\Entities\UserWithPassword;
 
 /**

@@ -8,34 +8,36 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // User - dominio general
+        // ── Rank (primero: RankResolverService es dependencia de otros controllers)
+        $this->app->register(
+            \Src\Recycling\Rank\Infraestructure\Services\DependencyInversionServices::class
+        );
+
+        // ── User - dominio general
         $this->app->register(
             \Src\Recycling\User\Infraestructure\Services\DependencyInversionServices::class
         );
 
-        /* User - autenticación
+        // ── User - autenticación
         $this->app->register(
-            \Src\Recycling\User\Infraestructure\Services\AuthDependencyInversionServices::class
-        );*/
+            \Src\Recycling\User\Infraestructure\Services\DependencyInversionServices::class
+        );
 
-        // CollectionPoint
+        // ── CollectionPoint
         $this->app->register(
             \Src\Recycling\CollectionPoint\Infraestructure\Services\DependencyInversionServices::class
         );
 
-        // WasteItem
+        // ── WasteItem
         $this->app->register(
             \Src\Recycling\WasteItem\Infraestructure\Services\DependencyInversionServices::class
         );
 
-        // RecycleAction
+        // ── RecycleAction
         $this->app->register(
             \Src\Recycling\RecycleAction\Infraestructure\Services\DependencyInversionServices::class
         );
     }
 
-    public function boot(): void
-    {
-        //
-    }
+    public function boot(): void {}
 }
