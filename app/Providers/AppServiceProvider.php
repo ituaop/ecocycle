@@ -2,24 +2,40 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        // User - dominio general
+        $this->app->register(
+            \Src\Recycling\User\Infraestructure\Services\DependencyInversionServices::class
+        );
+
+        /* User - autenticación
+        $this->app->register(
+            \Src\Recycling\User\Infraestructure\Services\AuthDependencyInversionServices::class
+        );*/
+
+        // CollectionPoint
+        $this->app->register(
+            \Src\Recycling\CollectionPoint\Infraestructure\Services\DependencyInversionServices::class
+        );
+
+        // WasteItem
+        $this->app->register(
+            \Src\Recycling\WasteItem\Infraestructure\Services\DependencyInversionServices::class
+        );
+
+        // RecycleAction
+        $this->app->register(
+            \Src\Recycling\RecycleAction\Infraestructure\Services\DependencyInversionServices::class
+        );
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        Vite::prefetch(concurrency: 3);
+        //
     }
 }

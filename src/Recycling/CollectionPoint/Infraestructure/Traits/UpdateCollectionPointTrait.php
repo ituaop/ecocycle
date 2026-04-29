@@ -12,11 +12,13 @@ trait UpdateCollectionPointTrait
         $model = CollectionPointModel::find($cp->getIdValue());
         if ($model) {
             $model->update([
-                'name'      => $cp->getNameValue(),
-                'address'   => $cp->getAddressValue(),
-                'latitude'  => $cp->getLatitudeValue(),
-                'longitude' => $cp->getLongitudeValue(),
-                'status'    => $cp->getStatusValue(),
+                'name'                => $cp->getNameValue(),
+                'address'             => $cp->getAddressValue(),
+                'latitude'            => $cp->getLatitudeValue(),
+                'longitude'           => $cp->getLongitudeValue(),
+                'status'              => $cp->getStatusValue(),
+                'schedule'            => $cp->getScheduleValue(),
+                'accepted_categories' => $cp->getAcceptedCategoriesJson(),
             ]);
         }
     }

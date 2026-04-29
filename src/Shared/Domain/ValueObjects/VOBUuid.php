@@ -1,30 +1,51 @@
 <?php
 
-namespace Src\Shared\Domain\ValueObjects;
+namespace Src\shared\Domain\ValueObjects;
 
 use InvalidArgumentException;
-use Ramsey\Uuid\Uuid;
 
- abstract class VOBUuid{
+/**
+ * Value Object base para UUIDs.
+ * Valida el formato UUID v4 y lo normaliza en minúsculas.
+ */
+abstract class VOBUuid
+{
+    private string $value;
 
- protected string $value;
-
- public function __construct(?string $value=null){
-    if($value == null){
-            $this->value = Uuid::uuid4()->toString();
-        }else{
-            $this->ensureIsValidUuid($value);
-            $this->value = $value;
- }
- }
-
- public function value(): string { return $this->value; }
-
-    public function ensureISValidUuid(string $id)
+    public function __construct(?string $value)
     {
-        if(!Uuid::isValid($id)){
-            throw new InvalidArgumentException(
-                sprintf('The value <%s> is not a valid UUID. Please try again.', static::class, $id));
+        // Si viene null generamos uno nuevo
+        if ($value === null) {
+            $value = \Illuminate\Support\Str::uuid()->toString();
         }
+
+        $this->ensureIsValidUuid($value);
+        $this->value = strtolower($value);
+    }
+
+    private function ensureIsValidUuid(string $value): void
+    {
+        $pattern = '/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
+
+        if (!preg_match($pattern, $value)) {
+            throw new InvalidArgumentException(
+                "El valor <{$value}> no es un UUID válido."
+            );
+        }
+    }
+
+    public function value(): string
+    {
+        return $this->value;
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 }

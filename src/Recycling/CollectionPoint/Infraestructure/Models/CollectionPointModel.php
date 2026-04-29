@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class CollectionPointModel extends Model
 {
-    protected $table      = 'collection_points';
-    protected $keyType    = 'string';
-    protected $primaryKey = 'id';
+    protected $table        = 'collection_points';
+    protected $keyType      = 'string';
+    protected $primaryKey   = 'id';
     public    $incrementing = false;
 
     protected $fillable = [
@@ -18,6 +18,8 @@ class CollectionPointModel extends Model
         'latitude',
         'longitude',
         'status',
+        'schedule',
+        'accepted_categories',
     ];
 
     public $timestamps = true;

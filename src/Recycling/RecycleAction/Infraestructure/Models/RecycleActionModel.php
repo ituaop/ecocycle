@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class RecycleActionModel extends Model
 {
-    protected $table      = 'recycle_actions';
-    protected $keyType    = 'string';
-    protected $primaryKey = 'id';
+    protected $table        = 'recycle_actions';
+    protected $keyType      = 'string';
+    protected $primaryKey   = 'id';
     public    $incrementing = false;
 
     protected $fillable = [
@@ -19,6 +19,15 @@ class RecycleActionModel extends Model
         'quantity',
         'date',
         'points_earned',
+        'level_before',
+        'level_after',
+        'level_up',
+    ];
+
+    protected $casts = [
+        'quantity'      => 'integer',
+        'points_earned' => 'integer',
+        'level_up'      => 'boolean',
     ];
 
     public $timestamps = true;

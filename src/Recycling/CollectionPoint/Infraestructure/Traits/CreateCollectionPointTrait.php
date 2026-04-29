@@ -10,12 +10,14 @@ trait CreateCollectionPointTrait
     public function create(CollectionPoint $cp): void
     {
         CollectionPointModel::create([
-            'id'        => $cp->getIdValue(),
-            'name'      => $cp->getNameValue(),
-            'address'   => $cp->getAddressValue(),
-            'latitude'  => $cp->getLatitudeValue(),
-            'longitude' => $cp->getLongitudeValue(),
-            'status'    => $cp->getStatusValue(),
+            'id'                  => $cp->getIdValue(),
+            'name'                => $cp->getNameValue(),
+            'address'             => $cp->getAddressValue(),
+            'latitude'            => $cp->getLatitudeValue(),
+            'longitude'           => $cp->getLongitudeValue(),
+            'status'              => $cp->getStatusValue(),
+            'schedule'            => $cp->getScheduleValue(),
+            'accepted_categories' => $cp->getAcceptedCategoriesJson(),
         ]);
     }
 }

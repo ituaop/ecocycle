@@ -3,11 +3,13 @@
 namespace Src\Recycling\CollectionPoint\Infraestructure\Hydrators;
 
 use Src\Recycling\CollectionPoint\Domain\Entities\CollectionPoint;
+use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointAcceptedCategories;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointAddress;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointId;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointLatitude;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointLongitude;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointName;
+use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointSchedule;
 use Src\Recycling\CollectionPoint\Domain\ValueObjects\CollectionPointStatus;
 use Src\Recycling\CollectionPoint\Infraestructure\Models\CollectionPointModel;
 
@@ -21,7 +23,9 @@ class CollectionPointHydrator
             new CollectionPointAddress($model->address),
             new CollectionPointLatitude((float) $model->latitude),
             new CollectionPointLongitude((float) $model->longitude),
-            new CollectionPointStatus($model->status)
+            new CollectionPointStatus($model->status),
+            new CollectionPointSchedule($model->schedule),
+            new CollectionPointAcceptedCategories($model->accepted_categories ?? '[]')
         );
     }
 }

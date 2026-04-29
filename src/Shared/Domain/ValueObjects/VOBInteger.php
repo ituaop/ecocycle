@@ -3,14 +3,22 @@
 namespace Src\shared\Domain\ValueObjects;
 
 use InvalidArgumentException;
-class VOBInteger
-{
 
-    protected int $value;
+/**
+ * Value Object base para enteros >= 0.
+ */
+abstract class VOBInteger
+{
+    private int $value;
 
     public function __construct(int $value)
     {
-        $this->ensureIsPositiveOrZero($value);
+        if ($value < 0) {
+            throw new InvalidArgumentException(
+                "El valor entero no puede ser negativo en " . static::class . ". Recibido: {$value}"
+            );
+        }
+
         $this->value = $value;
     }
 
@@ -19,14 +27,13 @@ class VOBInteger
         return $this->value;
     }
 
-    protected function ensureIsPositiveOrZero(int $value): void
+    public function equals(self $other): bool
     {
-        if ($value < 0) {
-            // Usamos static::class para que en el error salga el nombre de la clase hija (ej. "PostCommentCount")
-            throw new InvalidArgumentException(
-                sprintf('<%s> no permite el valor <%s>. Debe ser un número entero mayor o igual a 0.', static::class, $value)
-            );
-        }
+        return $this->value === $other->value;
     }
 
+    public function __toString(): string
+    {
+        return (string) $this->value;
+    }
 }

@@ -15,7 +15,7 @@ trait UpdateUserTrait
             $model->update([
                 'username'     => $user->getUsernameValue(),
                 'email'        => $user->getEmailValue(),
-                'password'     => $user->getPasswordValue(),
+                'password'     => $user->getPasswordHash(),
                 'level'        => $user->getLevelValue(),
                 'total_points' => $user->getTotalPointsValue(),
             ]);

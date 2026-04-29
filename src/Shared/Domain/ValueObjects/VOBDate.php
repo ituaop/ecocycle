@@ -3,36 +3,48 @@
 namespace Src\shared\Domain\ValueObjects;
 
 use InvalidArgumentException;
-use DateTimeImmutable;
-use Exception;
 
-class VOBDate
+/**
+ * Value Object base para fechas en formato Y-m-d.
+ */
+abstract class VOBDate
 {
-    protected string $value;
+    private string $value;
 
-    public function __construct(?string $value = null)
+    public function __construct(string $value)
     {
-        if ($value == null) {
-            $this->value = (new DateTimeImmutable())->format('Y-m-d H:i:s');
-        } else {
-            $this->ensureIsValidDate($value);
-            $this->value = (new DateTimeImmutable($value))->format('Y-m-d H:i:s'); 
-        }
+        $this->ensureIsValidDate($value);
+        $this->value = $value;
     }
 
-    public function value(): string 
-    { 
-        return $this->value; 
-    }
-
-    protected function ensureIsValidDate(string $date): void
+    private function ensureIsValidDate(string $value): void
     {
-        try {
-            new DateTimeImmutable($date);
-        } catch (Exception $e) {
+        $date = \DateTime::createFromFormat('Y-m-d', $value);
+
+        if (!$date || $date->format('Y-m-d') !== $value) {
             throw new InvalidArgumentException(
-                sprintf('<%s> no permite el valor <%s>. No es una fecha válida.', static::class, $date)
+                "El valor <{$value}> no es una fecha válida (formato esperado: Y-m-d)."
             );
         }
+    }
+
+    public function value(): string
+    {
+        return $this->value;
+    }
+
+    public function toDateTime(): \DateTime
+    {
+        return \DateTime::createFromFormat('Y-m-d', $this->value);
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 }
