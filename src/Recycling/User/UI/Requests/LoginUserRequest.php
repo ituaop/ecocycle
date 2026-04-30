@@ -4,7 +4,6 @@ namespace Src\Recycling\User\UI\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class LoginUserRequest extends FormRequest
 {
     public function authorize(): bool

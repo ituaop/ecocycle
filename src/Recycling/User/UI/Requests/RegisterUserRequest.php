@@ -4,12 +4,10 @@ namespace Src\Recycling\User\UI\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
 class RegisterUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // Solo usuarios no autenticados pueden registrarse
         return !auth()->check();
     }
 
