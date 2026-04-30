@@ -9,7 +9,7 @@ use Src\Recycling\User\Domain\Entities\User;
 use Src\Recycling\User\Domain\ValueObjects\UserEmail;
 use Src\Recycling\User\Domain\ValueObjects\UserId;
 use Src\Recycling\User\Domain\ValueObjects\UserLevel;
-use Src\Recycling\User\Domain\ValueObjects\UserPassword;
+use Src\Recycling\User\Domain\ValueObjects\UserName;
 use Src\Recycling\User\Domain\ValueObjects\UserTotalPoints;
 use Src\Recycling\User\Domain\ValueObjects\UserUserName;
 
@@ -27,9 +27,9 @@ class UpdateUserUseCase
 
         $user = new User(
             $id,
+            new UserName($dto->getName()),
             new UserUserName($dto->getUsername()),
             new UserEmail($dto->getEmail()),
-            new UserPassword($dto->getPassword()),
             new UserLevel($dto->getLevel()),
             new UserTotalPoints($dto->getTotalPoints())
         );

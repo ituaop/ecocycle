@@ -16,12 +16,12 @@ class CreateUserController extends Controller
     {
         try {
             $dto = new CreateUserDTO(
-                $request->input('id'),
-                $request->input('username'),
-                $request->input('email'),
-                $request->input('password'),
-                $request->input('level', 'BEGINNER'),
-                (int) $request->input('total_points', 0)
+                id:          $request->input('id'),
+                name:        $request->input('name'),
+                username:    $request->input('username'),
+                email:       $request->input('email'),
+                level:       $request->input('level', 'BEGINNER'),
+                totalPoints: (int) $request->input('total_points', 0)
             );
 
             $user = $this->useCase->execute($dto);
@@ -29,7 +29,11 @@ class CreateUserController extends Controller
             return response()->json([
                 'status'  => 'success',
                 'message' => 'Usuario creado correctamente.',
-                'data'    => ['id' => $user->getIdValue()],
+                'data'    => [
+                    'id'       => $user->getIdValue(),
+                    'name'     => $user->getNameValue(),
+                    'username' => $user->getUsernameValue(),
+                ],
             ], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);

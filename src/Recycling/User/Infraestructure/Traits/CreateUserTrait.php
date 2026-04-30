@@ -3,24 +3,21 @@
 namespace Src\Recycling\User\Infraestructure\Traits;
 
 use Src\Recycling\User\Domain\Entities\User;
-use Src\Recycling\User\Domain\Entities\UserWithPassword;
-use Src\Recycling\User\Infraestructure\Models\UserAuthModel;
+use Src\Recycling\User\Infraestructure\Models\UserModel;
 
 /**
- * Persiste un usuario nuevo CON contraseña hasheada.
- * Usa UserAuthModel (extiende Authenticatable).
+ * Crea un usuario SIN contraseña (operación CRUD general).
+ * Para registros con contraseña usar RegisterUserTrait.
  */
-trait RegisterUserTrait
+trait CreateUserTrait
 {
-    public function registerUser(User $user): void
+    public function create(User $user): void
     {
-        /** @var UserWithPassword $user */
-        UserAuthModel::create([
+        UserModel::create([
             'id'           => $user->getIdValue(),
             'name'         => $user->getNameValue(),
             'username'     => $user->getUsernameValue(),
             'email'        => $user->getEmailValue(),
-            'password'     => $user->getPasswordHash(),
             'level'        => $user->getLevelValue(),
             'total_points' => $user->getTotalPointsValue(),
         ]);

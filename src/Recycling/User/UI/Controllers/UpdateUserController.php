@@ -16,12 +16,12 @@ class UpdateUserController extends Controller
     {
         try {
             $dto = new CreateUserDTO(
-                $id,
-                $request->input('username'),
-                $request->input('email'),
-                $request->input('password'),
-                $request->input('level'),
-                (int) $request->input('total_points')
+                id:          $id,
+                name:        $request->input('name'),
+                username:    $request->input('username'),
+                email:       $request->input('email'),
+                level:       $request->input('level'),
+                totalPoints: (int) $request->input('total_points', 0)
             );
 
             $user = $this->useCase->execute($dto);
@@ -31,9 +31,9 @@ class UpdateUserController extends Controller
                 'message' => 'Usuario actualizado correctamente.',
                 'data'    => [
                     'id'           => $user->getIdValue(),
+                    'name'         => $user->getNameValue(),
                     'username'     => $user->getUsernameValue(),
                     'email'        => $user->getEmailValue(),
-                    'password'     => $user->getPasswordValue(),
                     'level'        => $user->getLevelValue(),
                     'total_points' => $user->getTotalPointsValue(),
                 ],
