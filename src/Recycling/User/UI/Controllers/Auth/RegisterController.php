@@ -59,4 +59,5 @@ class RegisterController extends Controller
                 ->withInput($request->only('name', 'email'));
         }
     }
+    
 }

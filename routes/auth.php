@@ -6,7 +6,7 @@
 | Las rutas de autenticación están definidas en routes/web.php
 | usando los controllers DDD del bounded context User.
 |
-| Este archivo se mantiene para compatibilidad con la estructura de Breeze
+| Ejste archivo se mantiene para compatibilidad con la estructura de Breeze
 | pero no debe registrar ninguna ruta para evitar conflictos de nombres.
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
