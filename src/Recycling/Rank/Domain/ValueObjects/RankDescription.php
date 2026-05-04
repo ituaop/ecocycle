@@ -1,0 +1,24 @@
+<?php
+
+namespace Src\Recycling\Rank\Domain\ValueObjects;
+
+use InvalidArgumentException;
+
+class RankDescription
+{
+    private string $value;
+
+    public function __construct(string $value)
+    {
+        $value = trim($value);
+        if (empty($value)) {
+            throw new InvalidArgumentException('La descripción del rango no puede estar vacía.');
+        }
+        $this->value = $value;
+    }
+
+    public function value(): string { return $this->value; }
+    public function __toString(): string { return $this->value; }
+}
+
+
