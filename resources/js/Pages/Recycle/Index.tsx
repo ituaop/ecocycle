@@ -85,27 +85,27 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-                /* Steps bar */
+                /* barra de pasos */
                 .steps { display:flex; background:#fff; border-radius:12px; border:1px solid #e8ebe6; overflow:hidden; margin-bottom:1.5rem; }
-                .step  { flex:1; display:flex; align-items:center; gap:9px; padding:13px 18px; font-size:13.5px; color:#9ca3af; border-right:1px solid #f0f0ee; cursor:pointer; transition:background 0.15s; user-select:none; }
-                .step:last-child { border-right:none; }
-                .step.done   { color:#2d6a4f; }
-                .step.active { background:#f0fdf4; color:#1a3a2a; font-weight:500; }
-                .step-num { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; background:#f0f0ee; color:#9ca3af; flex-shrink:0; transition:all 0.15s; }
-                .step.active .step-num { background:#52b788; color:#fff; }
-                .step.done   .step-num { background:#2d6a4f; color:#fff; }
-                @media(max-width:600px){ .step { padding:10px 12px; font-size:12px; gap:6px; } }
+                .paso { flex:1; display:flex; align-items:center; gap:9px; padding:13px 18px; font-size:13.5px; color:#9ca3af; border-right:1px solid #f0f0ee; cursor:pointer; transition:background 0.15s; user-select:none; }
+                .paso:last-child { border-right:none; }
+                .paso.done { color:#2d6a4f; }
+                .paso.active { background:#f0fdf4; color:#1a3a2a; font-weight:500; }
+                .paso-num { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; background:#f0f0ee; color:#9ca3af; flex-shrink:0; transition:all 0.15s; }
+                .paso.active .paso-num { background:#52b788; color:#fff; }
+                .paso.done   .paso-num { background:#2d6a4f; color:#fff; }
+                @media(max-width:600px){ .paso { padding:10px 12px; font-size:12px; gap:6px; } }
 
-                /* Category grid */
-                .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-bottom:1.5rem; }
-                .cat-btn  { padding:16px 10px; border-radius:12px; border:2px solid #e8ebe6; background:#fff; cursor:pointer; text-align:center; transition:all 0.15s; display:flex; flex-direction:column; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; }
-                .cat-btn:hover   { transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,0.08); border-color:#52b788; }
-                .cat-btn.sel     { border-width:2px; }
-                .cat-emoji       { font-size:30px; line-height:1; }
-                .cat-label       { font-size:13px; font-weight:600; }
-                .cat-count       { font-size:11px; color:#9ca3af; }
+                /* categoria */
+                .categoria-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-bottom:1.5rem; }
+                .categoria-boton  { padding:16px 10px; border-radius:12px; border:2px solid #e8ebe6; background:#fff; cursor:pointer; text-align:center; transition:all 0.15s; display:flex; flex-direction:column; align-items:center; gap:7px; font-family:'DM Sans',sans-serif; }
+                .categoria-boton:hover   { transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,0.08); border-color:#52b788; }
+                .categoria-boton.sel     { border-width:2px; }
+                .categoria-emoji       { font-size:30px; line-height:1; }
+                .categoria-label       { font-size:13px; font-weight:600; }
+                .categoria-count       { font-size:11px; color:#9ca3af; }
 
-                /* Item grid */
+                /* grid */
                 .item-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; }
                 .item-card { padding:15px; border-radius:12px; border:2px solid #e8ebe6; background:#fff; cursor:pointer; transition:all 0.15s; }
                 .item-card:hover { border-color:#52b788; transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,0.07); }
@@ -115,50 +115,50 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                 .item-pts   { font-size:13px; font-weight:700; color:#2d6a4f; }
                 .item-sel-hint { font-size:11px; color:#52b788; font-weight:500; }
 
-                /* CP list */
-                .cp-card { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border-radius:12px; border:2px solid #e8ebe6; background:#fff; cursor:pointer; transition:all 0.15s; margin-bottom:8px; }
-                .cp-card:hover { border-color:#52b788; }
-                .cp-card.sel   { border-color:#2d6a4f; background:#f0fdf4; }
-                .cp-icon { font-size:22px; flex-shrink:0; margin-top:2px; }
-                .cp-name { font-size:14px; font-weight:600; color:#1a3a2a; margin-bottom:3px; }
-                .cp-addr { font-size:12px; color:#6b7c6d; margin-bottom:3px; }
-                .cp-sched{ font-size:11px; color:#9ca3af; }
-                .cp-cats { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
-                .cp-cat-chip { font-size:10px; font-weight:600; padding:2px 7px; border-radius:8px; }
+                /* lista punto de recogida */
+                .puntoreciclaje-card { display:flex; align-items:flex-start; gap:12px; padding:14px 16px; border-radius:12px; border:2px solid #e8ebe6; background:#fff; cursor:pointer; transition:all 0.15s; margin-bottom:8px; }
+                .puntoreciclaje-card:hover { border-color:#52b788; }
+                .puntoreciclaje-card.sel   { border-color:#2d6a4f; background:#f0fdf4; }
+                .puntoreciclaje-icon { font-size:22px; flex-shrink:0; margin-top:2px; }
+                .puntoreciclaje-name { font-size:14px; font-weight:600; color:#1a3a2a; margin-bottom:3px; }
+                .puntoreciclaje-addr { font-size:12px; color:#6b7c6d; margin-bottom:3px; }
+                .puntoreciclaje-sched{ font-size:11px; color:#9ca3af; }
+                .puntoreciclaje-cats { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+                .puntoreciclaje-categoria-chip { font-size:10px; font-weight:600; padding:2px 7px; border-radius:8px; }
 
-                /* Confirm */
+                /* confirmacion */
                 .confirm-box { background:#fff; border-radius:14px; border:1px solid #e8ebe6; padding:1.75rem; max-width:500px; margin:0 auto; }
                 .pts-preview { display:flex; align-items:center; gap:9px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:11px 15px; margin-bottom:1.25rem; font-size:14px; color:#15803d; font-weight:500; }
                 .summary-row { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid #f0f0ee; font-size:14px; }
                 .summary-row:last-of-type { border-bottom:none; }
                 .qty-row { display:flex; align-items:center; gap:14px; margin-bottom:1.1rem; }
-                .qty-btn { width:38px; height:38px; border:1.5px solid #e0e0e0; border-radius:9px; background:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#1a3a2a; transition:border-color 0.15s; font-family:'DM Sans',sans-serif; }
-                .qty-btn:hover { border-color:#52b788; }
+                .qty-boton { width:38px; height:38px; border:1.5px solid #e0e0e0; border-radius:9px; background:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#1a3a2a; transition:border-color 0.15s; font-family:'DM Sans',sans-serif; }
+                .qty-boton:hover { border-color:#52b788; }
                 .qty-num { font-size:22px; font-weight:700; color:#1a3a2a; min-width:40px; text-align:center; }
                 .date-input { width:100%; height:44px; padding:0 12px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'DM Sans',sans-serif; outline:none; transition:border-color 0.2s; margin-bottom:1.25rem; }
                 .date-input:focus { border-color:#2d6a4f; }
-                .form-lbl { font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:block; }
-                .btn-submit { width:100%; height:50px; background:#1a3a2a; color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s, transform 0.15s; }
-                .btn-submit:hover:not(:disabled) { background:#2d6a4f; transform:translateY(-1px); }
-                .btn-submit:disabled { opacity:0.6; cursor:not-allowed; }
-                .btn-back { flex:1; height:46px; background:transparent; border:1.5px solid #e0e0e0; border-radius:11px; font-size:14px; cursor:pointer; color:#374151; font-family:'DM Sans',sans-serif; transition:border-color 0.15s; }
-                .btn-back:hover { border-color:#9ca3af; }
+                .formulario-lbl { font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:block; }
+                .boton-submit { width:100%; height:50px; background:#1a3a2a; color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s, transform 0.15s; }
+                .boton-submit:hover:not(:disabled) { background:#2d6a4f; transform:translateY(-1px); }
+                .boton-submit:disabled { opacity:0.6; cursor:not-allowed; }
+                .boton-back { flex:1; height:46px; background:transparent; border:1.5px solid #e0e0e0; border-radius:11px; font-size:14px; cursor:pointer; color:#374151; font-family:'DM Sans',sans-serif; transition:border-color 0.15s; }
+                .boton-back:hover { border-color:#9ca3af; }
                 .field-err { font-size:12px; color:#e53e3e; margin-top:5px; }
 
-                /* Selection badge */
+                /* elegir tipo */
                 .sel-badge { display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #e8ebe6; border-radius:12px; padding:10px 14px; margin-bottom:1rem; }
                 .sel-badge-name { font-weight:600; color:#1a3a2a; font-size:14px; }
                 .sel-badge-sub  { font-size:12px; color:#9ca3af; }
-                .btn-change { margin-left:auto; font-size:12px; color:#2d6a4f; font-weight:500; background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; }
+                .boton-change { margin-left:auto; font-size:12px; color:#2d6a4f; font-weight:500; background:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; }
 
-                /* Empty state */
+                /* vacio */
                 .empty { padding:2.5rem; text-align:center; background:#fff; border-radius:14px; border:1px solid #e8ebe6; }
                 .empty p { font-size:14px; color:#9ca3af; margin:12px 0 0; }
 
                 @keyframes spin { to { transform:rotate(360deg); } }
             `}</style>
 
-            {/* Steps indicator */}
+            {/* pasos para completar */}
             <div className="steps">
                 {[
                     { n: 1, label: 'Material' },
@@ -167,10 +167,10 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                 ].map(s => (
                     <div
                         key={s.n}
-                        className={`step${step === s.n ? ' active' : step > s.n ? ' done' : ''}`}
+                        className={`paso${step === s.n ? ' active' : step > s.n ? ' done' : ''}`}
                         onClick={() => step > s.n && setStep(s.n as 1 | 2 | 3)}
                     >
-                        <div className="step-num">
+                        <div className="paso-num">
                             {step > s.n ? '✓' : s.n}
                         </div>
                         <span>{s.label}</span>
@@ -178,18 +178,18 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                 ))}
             </div>
 
-            {/* ─── STEP 1: Elegir material ─────────────────────────────────── */}
+            {/* ─── paso 1 ─────────────────────────────────── */}
             {step === 1 && (
                 <div>
                     {/* Categorías */}
-                    <div className="cat-grid">
+                    <div className="categoria-grid">
                         {categories.map(cat => {
                             const cm = CAT_META[cat] ?? CAT_META.OTHER;
                             const isSel = selectedCategory === cat;
                             return (
                                 <button
                                     key={cat}
-                                    className={`cat-btn${isSel ? ' sel' : ''}`}
+                                    className={`categoria-boton${isSel ? ' sel' : ''}`}
                                     style={{
                                         borderColor:      isSel ? cm.color : undefined,
                                         backgroundColor:  isSel ? cm.bg : undefined,
@@ -197,15 +197,15 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                                     }}
                                     onClick={() => { setSelectedCategory(cat); setSelectedItem(null); }}
                                 >
-                                    <span className="cat-emoji">{cm.emoji}</span>
-                                    <span className="cat-label">{cm.label}</span>
-                                    <span className="cat-count">{wasteItemsByCategory[cat].length} materiales</span>
+                                    <span className="categoria-emoji">{cm.emoji}</span>
+                                    <span className="categoria-label">{cm.label}</span>
+                                    <span className="categoria-count">{wasteItemsByCategory[cat].length} materiales</span>
                                 </button>
                             );
                         })}
                     </div>
 
-                    {/* Materiales de la categoría */}
+                    {/* materiales */}
                     {selectedCategory ? (
                         <>
                             <p style={{ fontSize: 13, fontWeight: 600, color: '#6b7c6d', marginBottom: '0.75rem' }}>
@@ -221,7 +221,7 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                                         <div className="item-name">{item.name}</div>
                                         <div className="item-desc">{item.description}</div>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                            <span className="item-pts">⭐ {item.points} pts/ud</span>
+                                            <span className="item-pts"> {item.points} pts/ud</span>
                                             <span className="item-sel-hint">Seleccionar →</span>
                                         </div>
                                     </div>
@@ -230,13 +230,13 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                         </>
                     ) : (
                         <div style={{ textAlign: 'center', padding: '2rem', color: '#9ca3af', fontSize: 14 }}>
-                            👆 Elige una categoría para ver los materiales disponibles
+                             Elige para ver los materiales disponibles
                         </div>
                     )}
                 </div>
             )}
 
-            {/* ─── STEP 2: Elegir punto de recogida ───────────────────────── */}
+            {/* ─── paso 2 ───────────────────────── */}
             {step === 2 && selectedItem && (
                 <div>
                     {/* Badge material seleccionado */}
@@ -246,7 +246,7 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                             <div className="sel-badge-name">{selectedItem.name}</div>
                             <div className="sel-badge-sub">{selectedItem.points} pts por unidad</div>
                         </div>
-                        <button className="btn-change" onClick={() => setStep(1)}>Cambiar →</button>
+                        <button className="boton-change" onClick={() => setStep(1)}>Cambiar →</button>
                     </div>
 
                     <p style={{ fontSize: 13, fontWeight: 600, color: '#6b7c6d', marginBottom: '0.75rem' }}>
@@ -262,28 +262,28 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                         eligibleCPs.map(cp => (
                             <div
                                 key={cp.id}
-                                className={`cp-card${data.collection_point_id === cp.id ? ' sel' : ''}`}
+                                className={`puntoreciclaje-card${data.collection_point_id === cp.id ? ' sel' : ''}`}
                                 onClick={() => pickCP(cp.id)}
                             >
-                                <span className="cp-icon">📍</span>
+                                <span className="puntoreciclaje-icon">📍</span>
                                 <div style={{ flex: 1 }}>
-                                    <div className="cp-name">{cp.name}</div>
-                                    <div className="cp-addr">{cp.address}</div>
-                                    {cp.schedule && <div className="cp-sched">⏰ {cp.schedule}</div>}
-                                    <div className="cp-cats">
+                                    <div className="puntoreciclaje-name">{cp.name}</div>
+                                    <div className="puntoreciclaje-addr">{cp.address}</div>
+                                    {cp.schedule && <div className="puntoreciclaje-sched">⏰ {cp.schedule}</div>}
+                                    {/*<div className="puntoreciclaje-cats">
                                         {(cp.accepted_categories ?? []).map(c => {
                                             const cm = CAT_META[c] ?? CAT_META.OTHER;
                                             return (
                                                 <span
                                                     key={c}
-                                                    className="cp-cat-chip"
+                                                    className="puntoreciclaje-categoria-chip"
                                                     style={{ background: cm.bg, color: cm.color }}
                                                 >
                                                     {cm.emoji} {cm.label}
                                                 </span>
                                             );
                                         })}
-                                    </div>
+                                    </div>*/}
                                 </div>
                                 {data.collection_point_id === cp.id && (
                                     <span style={{ color: '#2d6a4f', fontSize: 20, flexShrink: 0 }}>✓</span>
@@ -294,7 +294,7 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                 </div>
             )}
 
-            {/* ─── STEP 3: Confirmar ──────────────────────────────────────── */}
+            {/* ─── paso 3 ──────────────────────────────────────── */}
             {step === 3 && selectedItem && selectedCP && (
                 <div>
                     <div className="confirm-box">
@@ -302,24 +302,24 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                             Confirma tu reciclaje
                         </h2>
 
-                        {/* Preview de puntos */}
+                        {/* calculo puntos (falta por definir aun) */}
                         <div className="pts-preview">
                             <span style={{ fontSize: 22 }}>⭐</span>
                             Ganarás <strong style={{ marginLeft: 4 }}>{estimatedPts} puntos</strong> con esta acción
                         </div>
 
-                        {/* Cantidad */}
-                        <label className="form-lbl">Cantidad (unidades)</label>
+                        {/* cantidad */}
+                        <label className="formulario-lbl">Cantidad (unidades)</label>
                         <div className="qty-row">
                             <button
                                 type="button"
-                                className="qty-btn"
+                                className="qty-boton"
                                 onClick={() => setData('quantity', Math.max(1, data.quantity - 1))}
                             >−</button>
                             <span className="qty-num">{data.quantity}</span>
                             <button
                                 type="button"
-                                className="qty-btn"
+                                className="qty-boton"
                                 onClick={() => setData('quantity', Math.min(999, data.quantity + 1))}
                             >+</button>
                             <span style={{ fontSize: 13, color: '#6b7c6d' }}>
@@ -328,8 +328,8 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                         </div>
                         {errors.quantity && <p className="field-err">{errors.quantity}</p>}
 
-                        {/* Fecha */}
-                        <label className="form-lbl">Fecha del reciclaje</label>
+                        {/* fecha */}
+                        <label className="formulario-lbl">Fecha del reciclaje</label>
                         <input
                             type="date"
                             className="date-input"
@@ -339,7 +339,7 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                         />
                         {errors.date && <p className="field-err">{errors.date}</p>}
 
-                        {/* Resumen */}
+                        {/* resumen de todo (aun queda por definr aun) */}
                         <div style={{ background: '#f9faf8', borderRadius: 10, padding: '1rem', marginBottom: '1.25rem' }}>
                             {[
                                 { label: 'Material',          value: selectedItem.name },
@@ -356,17 +356,17 @@ export default function RecycleIndex({ wasteItemsByCategory, collectionPoints }:
                             ))}
                         </div>
 
-                        {/* Errores generales */}
+                        {/* excepciones (falta retocar) */}
                         {errors.waste_item_id       && <p className="field-err">{errors.waste_item_id}</p>}
                         {errors.collection_point_id && <p className="field-err">{errors.collection_point_id}</p>}
 
-                        {/* Botones */}
+                        
                         <div style={{ display: 'flex', gap: 10 }}>
-                            <button type="button" className="btn-back" onClick={() => setStep(2)}>
+                            <button type="button" className="boton-back" onClick={() => setStep(2)}>
                                 ← Atrás
                             </button>
                             <button
-                                className="btn-submit"
+                                className="boton-submit"
                                 style={{ flex: 2 }}
                                 disabled={processing}
                                 onClick={() => post(route('recycle.store'))}

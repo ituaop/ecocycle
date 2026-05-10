@@ -46,7 +46,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
 
                 .result-wrap { max-width: 520px; margin: 0 auto; }
 
-                /* Level-up banner */
+                /* animacion subida de nivel */
                 .levelup-banner {
                     background: linear-gradient(135deg, #7e22ce, #a855f7);
                     border-radius: 16px 16px 0 0;
@@ -85,7 +85,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
                     inset: 0;
                     background: radial-gradient(ellipse at 70% 30%, rgba(82,183,136,0.18) 0%, transparent 60%);
                 }
-                .hero-label { font-size: 18px; position: relative; margin-bottom: 10px; }
+                .hero-label { font-size: 18px; position: relative; margin-bottom: 10px; color: rgba(255,255,255,0.65) }
                 .hero-pts   {
                     font-family: 'DM Serif Display', serif;
                     font-size: 72px;
@@ -179,7 +179,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
 
             <div className="result-wrap">
 
-                {/* ─── Level-up banner (solo si subió de rango) ─── */}
+                {/* ─── animacion level up (solo si sube de rango) ─── */}
                 {result.level_up && levelUpRank && (
                     <div className="levelup-banner">
                         <span className="levelup-icon">{levelUpRank.badge_icon}</span>
@@ -195,7 +195,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
                     </div>
                 )}
 
-                {/* ─── Main card ─── */}
+                {/* confirmacion reciclaje */}
                 <div className={`result-card ${result.level_up ? 'rounded-bottom' : 'rounded'}`}>
 
                     {/* Hero con puntos */}
@@ -208,7 +208,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
                         </div>
                     </div>
 
-                    {/* Detalles */}
+                    {/* detalles punto y rango del user */}
                     <div className="detail-row">
                         <span className="detail-label">Puntos totales</span>
                         <span className="detail-value" style={{ color: '#2d6a4f', fontSize: 17 }}>
@@ -222,7 +222,7 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
                         </span>
                     </div>
 
-                    {/* Barra de progreso al siguiente rango */}
+                    {/* progreso al siguiente rango */}
                     <div className="progress-section">
                         <div className="progress-labels">
                             <span>{currentRank?.label}</span>
@@ -244,59 +244,9 @@ export default function RecycleResult({ auth, result, allRanks, nextRank, progre
                     </div>
                 </div>
 
-                {/* ─── Progreso de rangos ─── */}
-                <div className="ranks-card">
-                    <div style={{ fontSize: 13, fontWeight: 600, color: '#1a3a2a', marginBottom: '0.75rem' }}>
-                        Tu progreso en rangos
-                    </div>
-                    {allRanks.map((r: Rank) => {
-                        const unlocked  = (user.total_points ?? 0) >= r.min_points;
-                        const isCurrent = r.name === user.level;
-                        return (
-                            <div
-                                key={r.name}
-                                className="rank-row"
-                                style={{
-                                    background:   isCurrent ? `${r.badge_color}12` : 'transparent',
-                                    borderColor:  isCurrent ? `${r.badge_color}44` : 'transparent',
-                                    opacity:      unlocked ? 1 : 0.45,
-                                }}
-                            >
-                                <span className="rank-icon-big">{r.badge_icon}</span>
-                                <div style={{ flex: 1 }}>
-                                    <div
-                                        className="rank-label"
-                                        style={{
-                                            fontWeight: isCurrent ? 700 : 400,
-                                            color:      isCurrent ? r.badge_color : '#374151',
-                                        }}
-                                    >
-                                        {r.label}
-                                    </div>
-                                    <div className="rank-pts-lbl">
-                                        desde {r.min_points} pts
-                                        {r.max_points > 0 ? ` — hasta ${r.max_points} pts` : ''}
-                                    </div>
-                                </div>
-                                {isCurrent && (
-                                    <span
-                                        className="rank-badge"
-                                        style={{
-                                            background: `${r.badge_color}22`,
-                                            color:      r.badge_color,
-                                        }}
-                                    >
-                                        Actual
-                                    </span>
-                                )}
-                                {!isCurrent && unlocked && <span className="rank-check">✓</span>}
-                                {!unlocked && <span className="rank-lock">🔒</span>}
-                            </div>
-                        );
-                    })}
-                </div>
+                
 
-                {/* ─── Botones de acción ─── */}
+                {/* redirects */}
                 <div className="action-btns">
                     <Link href={route('recycle.index')} className="btn-action btn-primary">
                         ♻️ Reciclar más

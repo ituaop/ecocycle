@@ -4,7 +4,7 @@ import { PageProps } from '@/types';
 export default function Welcome({ auth }: PageProps) {
     return (
         <>
-            <Head title="EcoCycle — Recicla y gana puntos"/>
+            <Head title="Ecocycle — Recicla y gana puntos"/>
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
                 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -51,7 +51,7 @@ export default function Welcome({ auth }: PageProps) {
                 .footer{border-top:1px solid rgba(255,255,255,0.08);padding:1.5rem 2rem;text-align:center;font-size:13px;color:rgba(255,255,255,0.3);}
             `}</style>
 
-            {/* Nav */}
+            
             <nav className="nav">
                 <div className="brand">
                     <div className="brand-dot">
@@ -60,7 +60,7 @@ export default function Welcome({ auth }: PageProps) {
                             <path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/>
                         </svg>
                     </div>
-                    <span className="brand-name">EcoCycle</span>
+                    <span className="brand-name">Ecocycle</span>
                 </div>
                 <div className="nav-btns">
                     {auth.user ? (
@@ -74,7 +74,7 @@ export default function Welcome({ auth }: PageProps) {
                 </div>
             </nav>
 
-            {/* Hero */}
+            
             <section className="hero">
                 <svg style={{position:'absolute',inset:0,pointerEvents:'none',opacity:0.6}} viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
                     <ellipse cx="200" cy="150" rx="400" ry="300" fill="rgba(82,183,136,0.06)" transform="rotate(-15 200 150)"/>
@@ -91,7 +91,7 @@ export default function Welcome({ auth }: PageProps) {
                 </div>
             </section>
 
-            {/* Cómo funciona */}
+            
             <section className="how-section">
                 <div className="section-badge">¿Cómo funciona?</div>
                 <h2 className="section-title">En tres pasos sencillos</h2>
@@ -111,39 +111,10 @@ export default function Welcome({ auth }: PageProps) {
                 </div>
             </section>
 
-            {/* Rangos */}
-            <section className="ranks-section">
-                <div style={{display:'inline-flex',alignItems:'center',gap:6,background:'rgba(82,183,136,0.12)',border:'1px solid rgba(82,183,136,0.2)',padding:'4px 12px',borderRadius:20,fontSize:12,color:'#52b788',fontWeight:600,marginBottom:'1rem',textTransform:'uppercase',letterSpacing:'0.3px'}}>Sistema de rangos</div>
-                <h2 style={{fontFamily:"'DM Serif Display',serif",fontSize:'clamp(28px,4vw,42px)',color:'#fff',letterSpacing:'-1px',marginBottom:'0.75rem'}}>¿A qué nivel llegarás?</h2>
-                <p style={{fontSize:15,color:'rgba(255,255,255,0.5)',fontWeight:300,maxWidth:480,margin:'0 auto 2.5rem'}}>Sube de rango automáticamente al acumular puntos. Cada rango tiene su insignia y reconocimiento especial.</p>
-                <div className="ranks-grid">
-                    {[
-                        { icon:'🌱', name:'Principiante', pts:'0 pts',       desc:'El inicio del viaje. Da tus primeros pasos.' },
-                        { icon:'♻️', name:'Intermedio',   pts:'200 pts',     desc:'Hábitos consolidados. ¡Ya marcas la diferencia!' },
-                        { icon:'🌍', name:'Avanzado',     pts:'600 pts',     desc:'Referente en tu comunidad. Impacto real.' },
-                        { icon:'🏆', name:'Experto',      pts:'1.500 pts',   desc:'Nivel máximo. Compromiso extraordinario.' },
-                    ].map(r => (
-                        <div key={r.name} className="rank-card">
-                            <div className="rank-icon">{r.icon}</div>
-                            <div className="rank-name">{r.name}</div>
-                            <div className="rank-pts">desde {r.pts}</div>
-                            <div className="rank-desc">{r.desc}</div>
-                        </div>
-                    ))}
-                </div>
-            </section>
 
-            {/* CTA final */}
-            <section className="cta-section">
-                <h2>¿Listo para empezar?</h2>
-                <p>Crea tu cuenta gratis y empieza a reciclar hoy mismo.</p>
-                <Link href={route('register')} className="cta-primary" style={{display:'inline-flex'}}>
-                    Crear cuenta gratis →
-                </Link>
-            </section>
 
             <footer className="footer">
-                © {new Date().getFullYear()} EcoCycle · Hecho para ayudar al planeta
+                © {new Date().getFullYear()} Ecocycle · Hecho para ayudar al planeta
             </footer>
         </>
     );

@@ -65,7 +65,7 @@ export default function Register() {
                                 <path d="M12.56 6.6A10.97 10.97 0 0014 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 01-11.91 4.97"/>
                             </svg>
                         </div>
-                        <span className="brand-name">EcoCycle</span>
+                        <span className="brand-name">Ecocycle</span>
                     </div>
                     <div className="tagline">
                         <h1>Únete a la <em>revolución verde</em></h1>
@@ -74,8 +74,7 @@ export default function Register() {
                     <div className="perks">
                         {[
                             { title:'Sistema de puntos',    desc:'Gana recompensas por cada reciclaje',    emoji:'⭐' },
-                            { title:'Red de puntos',        desc:'12 puntos de recogida en Valencia',       emoji:'📍' },
-                            { title:'Sube de nivel',        desc:'De Principiante a Experto reciclando',    emoji:'🏆' },
+                            { title:'Geolocalización de puntos',        desc:'Puntos de recogida por toda Valencia',       emoji:'📍' }
                         ].map((p,i)=>(
                             <div key={i} className="perk">
                                 <div className="perk-icon"><span style={{fontSize:16}}>{p.emoji}</span></div>

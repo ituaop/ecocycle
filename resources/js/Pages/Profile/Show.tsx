@@ -66,11 +66,11 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                 .card { background:#fff; border-radius:14px; border:1px solid #e8ebe6; }
                 .stat-row { display:flex; justify-content:space-between; align-items:center; padding:9px 1.25rem; border-bottom:1px solid #f9faf8; font-size:14px; }
                 .stat-row:last-child { border-bottom:none; }
-                .tab-bar { display:flex; border-bottom:1px solid #f0f0ee; }
+                .tab-bar { display:flex; border-bottom:1px solid #abacaa; }
                 .tab-btn { padding:12px 18px; font-size:13.5px; font-weight:500; color:#9ca3af; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.15s; white-space:nowrap; }
                 .tab-btn.active { color:#1a3a2a; border-bottom-color:#2d6a4f; }
                 .tab-btn:hover { color:#374151; }
-                .hist-row { display:flex; align-items:center; gap:10px; padding:0.8rem 1.25rem; border-bottom:1px solid #f9faf8; transition:background 0.1s; }
+                .hist-row { display:flex; align-items:center; gap:10px; padding:1.3rem 1.25rem; border-bottom:1px solid #abacaa; transition:background 0.1s; }
                 .hist-row:last-child { border-bottom:none; }
                 .hist-row:hover { background:#fafbf9; }
                 .cat-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
@@ -79,10 +79,10 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                 .pag-btn { padding:5px 14px; border:1.5px solid #e0e0e0; border-radius:8px; background:#fff; font-size:13px; cursor:pointer; font-family:'DM Sans',sans-serif; color:#374151; transition:border-color 0.15s; }
                 .pag-btn:hover { border-color:#2d6a4f; color:#2d6a4f; }
                 .pag-btn:disabled { opacity:0.4; cursor:not-allowed; }
-                .form-label { display:block; font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
-                .form-input { width:100%; height:44px; padding:0 12px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'DM Sans',sans-serif; color:#1c1c1c; outline:none; transition:border-color 0.2s; }
-                .form-input:focus { border-color:#2d6a4f; }
-                .form-input.err { border-color:#e53e3e; }
+                .formulario-label { display:block; font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
+                .formulario-input { width:100%; height:44px; padding:0 12px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:14px; font-family:'DM Sans',sans-serif; color:#1c1c1c; outline:none; transition:border-color 0.2s; }
+                .formulario-input:focus { border-color:#2d6a4f; }
+                .formulario-input.err { border-color:#e53e3e; }
                 .field-err { font-size:12px; color:#e53e3e; margin-top:4px; }
                 .save-btn { height:44px; padding:0 22px; background:#1a3a2a; color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:500; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background 0.15s; }
                 .save-btn:hover { background:#2d6a4f; }
@@ -92,10 +92,9 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
             `}</style>
 
             <div className="profile-grid">
-                {/* LEFT SIDEBAR */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-                    {/* Rank card */}
+                    {/* rango acutal */}
                     <div className="card" style={{ overflow: 'hidden' }}>
                         <div style={{ background: `linear-gradient(135deg,${currentRank?.badge_color ?? '#2d6a4f'}dd,${currentRank?.badge_color ?? '#2d6a4f'})`, padding: '1.5rem', textAlign: 'center' }}>
                             <div style={{ fontSize: 48, marginBottom: 8 }}>{currentRank?.badge_icon}</div>
@@ -109,7 +108,7 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                                 {nextRank ? <span>→ {nextRank.label} en {pointsToNext} pts</span> : <span>¡Rango máximo! 🎉</span>}
                             </div>
                         </div>
-                        {/* Todos los rangos miniatura */}
+                        {/* display de rangos */}
                         <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: 5 }}>
                             {allRanks.map((r: Rank) => {
                                 const unlocked = profileUser.total_points >= r.min_points;
@@ -128,7 +127,7 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                         </div>
                     </div>
 
-                    {/* Stats */}
+                    {/* estadisticas */}
                     <div className="card">
                         <div style={{ padding: '1rem 1.25rem', borderBottom: '1px solid #f0f0ee', fontSize: 13, fontWeight: 600, color: '#1a3a2a' }}>Estadísticas</div>
                         {[
@@ -144,17 +143,14 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                         ))}
                     </div>
 
-                    {/* Quick action */}
-                    <Link href={route('recycle.index')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, height: 46, background: '#1a3a2a', color: '#fff', borderRadius: 12, textDecoration: 'none', fontSize: 14, fontWeight: 500, fontFamily: "'DM Sans',sans-serif" }}>
-                        ♻️ Registrar reciclaje
-                    </Link>
+                    
                 </div>
 
-                {/* RIGHT MAIN */}
+                
                 <div className="card" style={{ overflow: 'hidden' }}>
                     <div className="tab-bar">
                         {[
-                            { key: 'history',  label: `Historial (${stats.total_actions})` },
+                            { key: 'history',  label: `Historial completo (${stats.total_actions})` },
                             { key: 'settings', label: 'Datos personales' },
                             { key: 'password', label: 'Contraseña' },
                         ].map(t => (
@@ -165,12 +161,11 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                         ))}
                     </div>
 
-                    {/* ── HISTORIAL ── */}
+                    {/* historial */}
                     {tab === 'history' && (
                         <>
                             {history.length === 0 ? (
                                 <div className="empty-hist">
-                                    <div style={{ fontSize: 40, marginBottom: 12 }}>🌱</div>
                                     <p style={{ color: '#9ca3af', fontSize: 14, margin: 0 }}>
                                         Aún no has registrado ningún reciclaje.<br />
                                         <Link href={route('recycle.index')} style={{ color: '#2d6a4f', fontWeight: 500 }}>¡Empieza ahora!</Link>
@@ -186,16 +181,12 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                                                 <div style={{ flex: 1, minWidth: 0 }}>
                                                     <div style={{ fontSize: 14, fontWeight: 500, color: '#1a3a2a', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                                         {a.waste_name}
-                                                        {a.level_up && <span className="levelup-tag" style={{ marginLeft: 7 }}>🏆 Subida de rango</span>}
+                                                        
                                                     </div>
                                                     <div style={{ fontSize: 12, color: '#9ca3af', marginTop: 2 }}>
                                                         📍 {a.cp_name} · {a.quantity} uds. · {new Date(a.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })}
                                                     </div>
-                                                    {a.level_up && (
-                                                        <div style={{ fontSize: 11, color: '#7e22ce', marginTop: 2 }}>
-                                                            {a.level_before} → {a.level_after}
-                                                        </div>
-                                                    )}
+                                                    
                                                 </div>
                                                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                                                     <div style={{ fontSize: 14, fontWeight: 700, color: '#2d6a4f' }}>+{a.points_earned} pts</div>
@@ -224,7 +215,7 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                         </>
                     )}
 
-                    {/* ── DATOS PERSONALES ── */}
+                    {/* ── datos personales ── */}
                     {tab === 'settings' && (
                         <div style={{ padding: '1.5rem' }}>
                             {status === 'profile-updated' && (
@@ -232,20 +223,20 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                             )}
                             <form onSubmit={e => { e.preventDefault(); infoForm.patch(route('profile.update')); }}>
                                 <div style={{ marginBottom: '1.1rem' }}>
-                                    <label className="form-label">Nombre completo</label>
-                                    <input type="text" className={`form-input${infoForm.errors.name ? ' err' : ''}`}
+                                    <label className="formulario-label">Nombre completo</label>
+                                    <input type="text" className={`formulario-input${infoForm.errors.name ? ' err' : ''}`}
                                         value={infoForm.data.name} onChange={e => infoForm.setData('name', e.target.value)} />
                                     {infoForm.errors.name && <p className="field-err">{infoForm.errors.name}</p>}
                                 </div>
                                 <div style={{ marginBottom: '1.1rem' }}>
-                                    <label className="form-label">Correo electrónico</label>
-                                    <input type="email" className={`form-input${infoForm.errors.email ? ' err' : ''}`}
+                                    <label className="formulario-label">Correo electrónico</label>
+                                    <input type="email" className={`formulario-input${infoForm.errors.email ? ' err' : ''}`}
                                         value={infoForm.data.email} onChange={e => infoForm.setData('email', e.target.value)} />
                                     {infoForm.errors.email && <p className="field-err">{infoForm.errors.email}</p>}
                                 </div>
                                 <div style={{ marginBottom: '1.5rem' }}>
-                                    <label className="form-label">Username</label>
-                                    <input type="text" className="form-input" value={profileUser.username} disabled
+                                    <label className="formulario-label">Username</label>
+                                    <input type="text" className="formulario-input" value={profileUser.username} disabled
                                         style={{ opacity: 0.6, cursor: 'not-allowed' }} />
                                     <p style={{ fontSize: 11, color: '#9ca3af', marginTop: 4 }}>El username no se puede cambiar.</p>
                                 </div>
@@ -256,7 +247,7 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                         </div>
                     )}
 
-                    {/* ── CONTRASEÑA ── */}
+                    {/* ── password ── */}
                     {tab === 'password' && (
                         <div style={{ padding: '1.5rem' }}>
                             {status === 'password-updated' && (
@@ -269,9 +260,9 @@ export default function ProfileShow({ auth, profileUser, stats, history, paginat
                                     { key: 'password_confirmation',  label: 'Confirmar nueva contraseña', ph: '••••••••' },
                                 ].map(f => (
                                     <div key={f.key} style={{ marginBottom: '1.1rem' }}>
-                                        <label className="form-label">{f.label}</label>
+                                        <label className="formulario-label">{f.label}</label>
                                         <input type="password" placeholder={f.ph}
-                                            className={`form-input${(passForm.errors as any)[f.key] ? ' err' : ''}`}
+                                            className={`formulario-input${(passForm.errors as any)[f.key] ? ' err' : ''}`}
                                             value={(passForm.data as any)[f.key]}
                                             onChange={e => passForm.setData(f.key as any, e.target.value)} />
                                         {(passForm.errors as any)[f.key] && (

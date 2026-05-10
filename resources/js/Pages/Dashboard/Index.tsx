@@ -24,16 +24,16 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
     const user      = auth.user;
     const { allRanks, nextRank, progress, pointsToNext } = rankInfo;
     const currentRank = allRanks.find(r => r.name === (user.level ?? 'BEGINNER'));
-    const maxWeekPts  = Math.max(...weekActivity.map(d => d.points), 1);
+    //const maxWeekPts  = Math.max(...weekActivity.map(d => d.points), 1);
 
     return (
         <AppLayout header={
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <h1 style={{ fontFamily: "'DM Serif Display',serif", fontSize: 22, color: '#1a3a2a', margin: 0 }}>
-                        Hola, {user.name.split(' ')[0]} 👋
+                        Bienvenido, {user.name.split(' ')[0]} 
                     </h1>
-                    <p style={{ fontSize: 13, color: '#6b7c6d', margin: '3px 0 0', fontWeight: 300 }}>Tu impacto medioambiental de hoy</p>
+
                 </div>
                 <Link href={route('recycle.index')} style={{ display: 'flex', alignItems: 'center', gap: 7, background: '#1a3a2a', color: '#fff', padding: '9px 18px', borderRadius: 10, fontSize: 14, fontWeight: 500, textDecoration: 'none', fontFamily: "'DM Sans',sans-serif" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -43,18 +43,18 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
         }>
             <Head title="Dashboard"/>
             <style>{`
-                .dash-grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.25rem; }
-                @media(max-width:900px){ .dash-grid4 { grid-template-columns:repeat(2,1fr); } }
-                @media(max-width:500px){ .dash-grid4 { grid-template-columns:1fr; } }
-                .dash-grid2 { display:grid; grid-template-columns:1fr 340px; gap:1.25rem; }
-                @media(max-width:1024px){ .dash-grid2 { grid-template-columns:1fr; } }
-                .card { background:#fff; border-radius:14px; border:1px solid #e8ebe6; }
-                .card-hd { padding:1rem 1.25rem; border-bottom:1px solid #f0f0ee; display:flex; align-items:center; justify-content:space-between; }
-                .card-title { font-size:14px; font-weight:600; color:#1a3a2a; }
-                .scard { background:#fff; border-radius:14px; border:1px solid #e8ebe6; padding:1.1rem 1.25rem; }
-                .scard-label { font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
-                .scard-val { font-family:'DM Serif Display',serif; font-size:30px; color:#1a3a2a; line-height:1; letter-spacing:-0.5px; }
-                .scard-sub { font-size:12px; color:#9ca3af; margin-top:3px; }
+                .mini-dashboard { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.25rem; }
+                @media(max-width:900px){ .mini-dashboard { grid-template-columns:repeat(2,1fr); } }
+                @media(max-width:500px){ .mini-dashboard { grid-template-columns:1fr; } }
+                .mini-dashboard2 { display:grid; grid-template-columns:1fr 340px; gap:1.25rem; }
+                @media(max-width:1024px){ .mini-dashboard2 { grid-template-columns:1fr; } }
+                .carta { background:#fff; border-radius:14px; border:1px solid #e8ebe6; }
+                .carta-hd { padding:1rem 1.25rem; border-bottom:1px solid #f0f0ee; display:flex; align-items:center; justify-content:space-between; }
+                .carta-title { font-size:14px; font-weight:600; color:#1a3a2a; }
+                .scarta { background:#fff; border-radius:14px; border:1px solid #e8ebe6; padding:1.1rem 1.25rem; }
+                .scarta-label { font-size:11px; font-weight:600; color:#9ca3af; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+                .scarta-val { font-family:'DM Serif Display',serif; font-size:30px; color:#1a3a2a; line-height:1; letter-spacing:-0.5px; }
+                .scarta-sub { font-size:12px; color:#9ca3af; margin-top:3px; }
                 .action-row { display:flex; align-items:center; gap:10px; padding:0.8rem 1.25rem; border-bottom:1px solid #f9faf8; transition:background 0.1s; }
                 .action-row:last-child { border-bottom:none; }
                 .action-row:hover { background:#fafbf9; }
@@ -65,28 +65,28 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                 .bar-fill { height:100%; border-radius:99px; transition:width 0.5s ease; }
             `}</style>
 
-            {/* 4 stat cards */}
-            <div className="dash-grid4">
+            {/* cartas parte sup */}
+            {/*icon: '⭐',, icon: '♻️',, icon: '📦' */}
+            <div className="mini-dashboard">
                 {[
-                    { label: 'Puntos totales',  value: (stats.total_points).toLocaleString(), sub: 'pts acumulados',   icon: '⭐' },
-                    { label: 'Reciclajes',       value: stats.total_actions,                   sub: 'acciones totales', icon: '♻️' },
-                    { label: 'Unidades',         value: (stats.total_units).toLocaleString(),  sub: 'items reciclados', icon: '📦' },
-                    { label: 'Rango actual',     value: currentRank?.badge_icon + ' ' + (currentRank?.label ?? stats.level), sub: nextRank ? `Siguiente: ${nextRank.label}` : '¡Rango máximo!', icon: '' },
+                    { label: 'Puntos totales',  value: (stats.total_points).toLocaleString(), sub: 'pts acumulados',    },
+                    { label: 'Reciclajes',       value: stats.total_actions,                   sub: 'acciones totales' },
+                    { label: 'Unidades',         value: (stats.total_units).toLocaleString(),  sub: 'items reciclados' },
                 ].map((s, i) => (
-                    <div key={i} className="scard">
-                        <div className="scard-label">{s.icon} {s.label}</div>
-                        <div className="scard-val" style={{ fontSize: i === 3 ? 18 : 30, marginTop: i === 3 ? 6 : 0 }}>{s.value}</div>
-                        <div className="scard-sub">{s.sub}</div>
+                    <div key={i} className="scarta">
+                        <div className="scarta-label">{/*s.icon*/} {s.label}</div>
+                        <div className="scarta-val" style={{ fontSize: i === 3 ? 18 : 30, marginTop: i === 3 ? 6 : 0 }}>{s.value}</div>
+                        <div className="scarta-sub">{s.sub}</div>
                     </div>
                 ))}
             </div>
 
-            <div className="dash-grid2">
-                {/* Left: recent actions */}
-                <div className="card">
-                    <div className="card-hd">
-                        <span className="card-title">Últimos reciclajes</span>
-                        <Link href={route('profile.show')} style={{ fontSize: 12, color: '#2d6a4f', textDecoration: 'none', fontWeight: 500 }}>Ver historial →</Link>
+            <div className="mini-dashboard2">
+                {/* acciones pasadas / historial */}
+                <div className="carta">
+                    <div className="carta-hd">
+                        <span className="carta-title">Historial de reciclajes de hoy</span>
+                        <Link href={route('profile.show')} style={{ fontSize: 12, color: '#2d6a4f', textDecoration: 'none', fontWeight: 500 }}>Ver historial completo →</Link>
                     </div>
                     {recentActions.length === 0 ? (
                         <div style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
@@ -107,7 +107,7 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                                 </div>
                                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                                     <div style={{ fontSize: 13, fontWeight: 600, color: '#2d6a4f' }}>+{a.points_earned} pts</div>
-                                    {a.level_up && <span className="badge" style={{ background: '#fdf4ff', color: '#7e22ce', marginTop: 2 }}>🏆 Subida</span>}
+                                    {a.level_up && <span className="badge" style={{ background: '#fdf4ff', color: '#7e22ce', marginTop: 2 }}>🏆 Subida de nivel</span>}
                                     <div style={{ fontSize: 11, color: '#9ca3af' }}>{new Date(a.date).toLocaleDateString('es-ES', { day:'2-digit', month:'short' })}</div>
                                 </div>
                             </div>
@@ -115,10 +115,10 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                     })}
                 </div>
 
-                {/* Right sidebar */}
+                {/* info usuario */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                     {/* Rank progress */}
-                    <div className="card" style={{ padding: '1.25rem' }}>
+                    <div className="carta" style={{ padding: '1.25rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '1rem' }}>
                             <span style={{ fontSize: 32 }}>{currentRank?.badge_icon}</span>
                             <div>
@@ -134,7 +134,7 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                             {nextRank ? <span>Faltan {pointsToNext} pts → {nextRank.label}</span> : <span>¡Rango máximo alcanzado! 🏆</span>}
                         </div>
 
-                        {/* All ranks */}
+                        {/* info rangos */}
                         <div style={{ marginTop: '1.25rem', display: 'flex', flexDirection: 'column', gap: 6 }}>
                             {allRanks.map((r: Rank) => (
                                 <div key={r.name} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px', borderRadius: 8, background: r.name === user.level ? `${r.badge_color}14` : 'transparent', border: r.name === user.level ? `1px solid ${r.badge_color}33` : '1px solid transparent' }}>
@@ -150,10 +150,10 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                         </div>
                     </div>
 
-                    {/* By category */}
+                    
                     {byCategory.length > 0 && (
-                        <div className="card">
-                            <div className="card-hd"><span className="card-title">Por categoría</span></div>
+                        <div className="carta">
+                            <div className="carta-hd"><span className="carta-title">Por categoría</span></div>
                             {byCategory.map(c => {
                                 const cm = CAT_META[c.category] ?? CAT_META.OTHER;
                                 const pct = Math.round((c.points / (stats.total_points || 1)) * 100);
@@ -171,9 +171,9 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                         </div>
                     )}
 
-                    {/* Week activity */}
+                    {/* actividad semanal falta por definir aun
                     {weekActivity.length > 0 && (
-                        <div className="card" style={{ padding: '1.1rem 1.25rem' }}>
+                        <div className="carta" style={{ padding: '1.1rem 1.25rem' }}>
                             <div style={{ fontSize: 13, fontWeight: 600, color: '#1a3a2a', marginBottom: '0.75rem' }}>Esta semana</div>
                             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 60 }}>
                                 {weekActivity.map(d => (
@@ -184,7 +184,7 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                                 ))}
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </AppLayout>

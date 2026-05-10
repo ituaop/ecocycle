@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
             RankSeeder::class,
             WasteItemSeeder::class,
             CollectionPointSeeder::class,
+            RewardSeeder::class,
         ]);
     }
 }

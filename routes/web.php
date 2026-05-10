@@ -1,4 +1,5 @@
 <?php
+use Src\Recycling\Rewards\UI\Controllers\Inertia\RewardsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use Src\Recycling\User\UI\Controllers\Auth\LoginController;
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
     // dashboard principal
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    // recompensas
+     Route::get('/rewards', RewardsController::class)->name('rewards');
 
     // flujo principal del usuario
     Route::get('/recycle',        [RecycleController::class, 'index']) ->name('recycle.index');
