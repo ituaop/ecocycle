@@ -17,7 +17,6 @@ class DashboardController extends Controller
         $user   = Auth::user();
         $userId = $user->id;
 
-        // Últimas 8 acciones con join a waste_items y collection_points
         $recentActions = DB::table('recycle_actions as ra')
             ->join('waste_items as wi',        'ra.waste_item_id',       '=', 'wi.id')
             ->join('collection_points as cp',  'ra.collection_point_id', '=', 'cp.id')
@@ -35,13 +34,11 @@ class DashboardController extends Controller
             ->map(fn($r) => (array) $r)
             ->toArray();
 
-        // Totales
         $totals = DB::table('recycle_actions')
             ->where('user_id', $userId)
             ->selectRaw('COUNT(*) as total_actions, SUM(points_earned) as total_pts, SUM(quantity) as total_units')
             ->first();
 
-        // Puntos por categoría
         $byCategory = DB::table('recycle_actions as ra')
             ->join('waste_items as wi', 'ra.waste_item_id', '=', 'wi.id')
             ->where('ra.user_id', $userId)
@@ -52,7 +49,6 @@ class DashboardController extends Controller
             ->map(fn($r) => (array) $r)
             ->toArray();
 
-        // Actividad de los últimos 7 días
         $weekActivity = DB::table('recycle_actions')
             ->where('user_id', $userId)
             ->where('date', '>=', now()->subDays(6)->toDateString())
@@ -63,7 +59,6 @@ class DashboardController extends Controller
             ->map(fn($r) => (array) $r)
             ->toArray();
 
-        // Info del rango actual
         $allRanks     = $this->rankResolver->getAllRanks();
         $nextRank     = $this->rankResolver->getNextRank($user->level ?? 'BEGINNER');
         $progress     = $this->rankResolver->progressInCurrentRank($user->total_points ?? 0, $user->level ?? 'BEGINNER');

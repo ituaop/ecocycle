@@ -15,11 +15,6 @@ class RecycleController extends Controller
 {
     public function __construct(private RankResolverService $rankResolver) {}
 
-    /**
-     * GET /recycle
-     * Pantalla principal de reciclaje: muestra los materiales disponibles
-     * y los puntos de recogida activos para que el usuario elija qué reciclar.
-     */
     public function index(): Response
     {
         $wasteItems = DB::table('waste_items')
@@ -58,11 +53,7 @@ class RecycleController extends Controller
         ]);
     }
 
-    /**
-     * POST /recycle
-     * Registra la acción de reciclaje, suma puntos al usuario
-     * y actualiza su rango si corresponde.
-     */
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -78,17 +69,13 @@ class RecycleController extends Controller
         $wasteItem = DB::table('waste_items')->find($request->waste_item_id);
         $pointsEarned = $wasteItem->points * (int) $request->quantity;
 
-        // Nivel ANTES
         $levelBefore = $user->level ?? 'BEGINNER';
 
-        // Sumar puntos
         $newTotalPoints = ($user->total_points ?? 0) + $pointsEarned;
 
-        // Resolver nuevo nivel
         $levelAfter = $this->rankResolver->resolveLevel($newTotalPoints);
         $levelUp    = $levelAfter !== $levelBefore;
 
-        // Registrar acción
         DB::table('recycle_actions')->insert([
             'id'                  => Str::uuid()->toString(),
             'user_id'             => $user->id,
@@ -104,7 +91,6 @@ class RecycleController extends Controller
             'updated_at'          => now(),
         ]);
 
-        // Actualizar usuario
         DB::table('recycling_users')
             ->where('id', $user->id)
             ->update([
@@ -113,7 +99,6 @@ class RecycleController extends Controller
                 'updated_at'   => now(),
             ]);
 
-        // Mensaje flash con datos del resultado
         session()->flash('recycle_result', [
             'points_earned' => $pointsEarned,
             'total_points'  => $newTotalPoints,
@@ -127,10 +112,7 @@ class RecycleController extends Controller
         return redirect()->route('recycle.result');
     }
 
-    /**
-     * GET /recycle/result
-     * Pantalla de resultado tras reciclar: puntos ganados, nuevo rango, etc.
-     */
+
     public function result(): Response
     {
         $result = session('recycle_result');

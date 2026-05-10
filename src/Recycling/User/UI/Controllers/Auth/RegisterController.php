@@ -17,17 +17,15 @@ class RegisterController extends Controller
 {
     public function __construct(private RegisterUserUseCase $useCase) {}
 
-    /** GET /register */
     public function create(): Response
     {
         return Inertia::render('Auth/Register');
     }
 
-    /** POST /register */
     public function store(RegisterUserRequest $request): RedirectResponse
     {
         try {
-            // 1. Registrar usuario en el dominio DDD
+            // registrar usuario 
             $dto = new RegisterUserDTO(
                 name:                 $request->input('name'),
                 email:                $request->input('email'),
@@ -37,20 +35,17 @@ class RegisterController extends Controller
 
             $domainUser = $this->useCase->execute($dto);
 
-            // 2. Recuperar el modelo Authenticatable recién creado
             $authModel = UserAuthModel::find($domainUser->getIdValue());
 
             if (!$authModel) {
                 throw new Exception('Error al crear el usuario. Inténtalo de nuevo.');
             }
 
-            // 3. Login automático tras el registro
+            // login automático tras registro
             Auth::login($authModel);
 
-            // 4. Regenerar sesión
             $request->session()->regenerate();
 
-            // 5. Redirigir al dashboard
             return redirect()->route('dashboard');
 
         } catch (Exception $e) {

@@ -2,10 +2,6 @@
 
 namespace Src\Recycling\User\Application\DTOs;
 
-/**
- * DTO para crear/actualizar usuarios desde operaciones CRUD generales.
- * NO incluye contraseña — para eso usar RegisterUserDTO.
- */
 readonly class CreateUserDTO
 {
     public function __construct(

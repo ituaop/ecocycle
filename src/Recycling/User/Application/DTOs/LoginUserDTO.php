@@ -2,9 +2,7 @@
 
 namespace Src\Recycling\User\Application\DTOs;
 
-/**
- * DTO para el caso de uso de inicio de sesión (Log In).
- */
+
 readonly class LoginUserDTO
 {
     public function __construct(

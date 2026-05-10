@@ -1,13 +1,8 @@
 <?php
 /*
-|--------------------------------------------------------------------------
-| Auth Routes — VACÍO INTENCIONALMENTE
-|--------------------------------------------------------------------------
-| Las rutas de autenticación están definidas en routes/web.php
-| usando los controllers DDD del bounded context User.
-|
-| Ejste archivo se mantiene para compatibilidad con la estructura de Breeze
-| pero no debe registrar ninguna ruta para evitar conflictos de nombres.
+
+| Auth Routes — VACÍO 
+
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;

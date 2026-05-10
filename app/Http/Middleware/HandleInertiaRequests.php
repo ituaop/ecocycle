@@ -31,7 +31,6 @@ class HandleInertiaRequests extends Middleware
                     'total_points'      => (int) ($user->total_points ?? 0),
                 ] : null,
             ],
-            // Flash messages compartidos para todas las páginas
             'flash' => [
                 'success' => session('success'),
                 'error'   => session('error'),

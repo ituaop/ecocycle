@@ -17,7 +17,6 @@ return [
     'providers' => [
         'recycling_users' => [
             'driver' => 'eloquent',
-            // ← Cambiar App\Models\User por:
             'model'  => \Src\Recycling\User\Infraestructure\Models\UserAuthModel::class,
         ],
     ],

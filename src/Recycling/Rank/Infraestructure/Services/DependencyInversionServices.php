@@ -11,13 +11,11 @@ class DependencyInversionServices extends ServiceProvider
 {
     public function register(): void
     {
-        // Puerto → implementación Eloquent
         $this->app->bind(
             RankRepositoryPort::class,
             EloquentRankRepository::class
         );
 
-        // RankResolverService como singleton para reutilizar caché en memoria
         $this->app->singleton(RankResolverService::class, function ($app) {
             return new RankResolverService(
                 $app->make(RankRepositoryPort::class)

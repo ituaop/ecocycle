@@ -17,7 +17,6 @@ class LoginController extends Controller
 {
     public function __construct(private LoginUserUseCase $useCase) {}
 
-    /** GET /login */
     public function create(): Response
     {
         return Inertia::render('Auth/Login', [
@@ -26,11 +25,10 @@ class LoginController extends Controller
         ]);
     }
 
-    /** POST /login */
     public function store(LoginUserRequest $request): RedirectResponse
     {
         try {
-            // 1. Validar credenciales en el dominio DDD
+            // 1. Validar credenciales 
             $dto = new LoginUserDTO(
                 email:         $request->input('email'),
                 plainPassword: $request->input('password'),
@@ -39,21 +37,18 @@ class LoginController extends Controller
 
             $domainUser = $this->useCase->execute($dto);
 
-            // 2. Recuperar el modelo Authenticatable por ID
-            //    (el domainUser ya verificó las credenciales, solo buscamos el modelo)
+           
             $authModel = UserAuthModel::find($domainUser->getIdValue());
 
             if (!$authModel) {
                 throw new Exception('Las credenciales no son correctas.');
             }
 
-            // 3. Iniciar sesión con el modelo Authenticatable
+        
             Auth::login($authModel, $dto->getRemember());
 
-            // 4. Regenerar sesión (previene session fixation)
             $request->session()->regenerate();
 
-            // 5. Redirigir al dashboard
             return redirect()->intended(route('dashboard'));
 
         } catch (Exception $e) {
@@ -63,7 +58,6 @@ class LoginController extends Controller
         }
     }
 
-    /** POST /logout */
     public function destroy(): RedirectResponse
     {
         Auth::logout();

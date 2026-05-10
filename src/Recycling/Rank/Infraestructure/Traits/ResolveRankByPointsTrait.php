@@ -8,15 +8,12 @@ use Src\Recycling\Rank\Infraestructure\Models\RankModel;
 
 trait ResolveRankByPointsTrait
 {
-    /**
-     * Devuelve la entidad Rank que corresponde a los puntos dados.
-     * Itera en orden ascendente y devuelve el último que cumpla la condición.
-     */
+
     public function resolveByPoints(int $totalPoints): Rank
     {
         $ranks = RankModel::orderBy('order')->get();
 
-        $resolved = $ranks->first(); // fallback: rango más bajo
+        $resolved = $ranks->first(); // fallback= rango más bajo
 
         foreach ($ranks as $model) {
             if ($totalPoints >= $model->min_points) {
@@ -30,9 +27,6 @@ trait ResolveRankByPointsTrait
         return RankHydrator::toDomain($resolved);
     }
 
-    /**
-     * Devuelve el rango siguiente al actual, o null si es el máximo.
-     */
     public function getNextRank(string $currentRankName): ?Rank
     {
         $ranks = RankModel::orderBy('order')->get();

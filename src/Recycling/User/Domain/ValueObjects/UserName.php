@@ -4,9 +4,7 @@ namespace Src\Recycling\User\Domain\ValueObjects;
 
 use InvalidArgumentException;
 
-/**
- * Nombre real del usuario (distinto de UserUserName que es el username/handle).
- */
+
 class UserName
 {
     private string $value;

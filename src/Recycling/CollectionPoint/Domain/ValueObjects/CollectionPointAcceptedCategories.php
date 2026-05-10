@@ -8,7 +8,7 @@ class CollectionPointAcceptedCategories
 {
     private const VALID = ['PLASTIC','GLASS','PAPER','METAL','ORGANIC','ELECTRONIC','OTHER'];
 
-    /** @var string[] */
+
     private array $value;
 
     public function __construct(array|string $categories)
@@ -30,7 +30,7 @@ class CollectionPointAcceptedCategories
         $this->value = array_values(array_unique(array_map('strtoupper', $categories)));
     }
 
-    /** @return string[] */
+    
     public function value(): array  { return $this->value; }
     public function toJson(): string { return json_encode($this->value); }
 
