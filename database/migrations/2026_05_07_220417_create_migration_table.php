@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('rewards', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->text('description');
             $table->string('emoji');               // visual del premio
@@ -22,10 +22,9 @@ return new class extends Migration {
         Schema::create('user_rewards', function (Blueprint $table) {
             $table->id();
             $table->uuid('user_id');
-            $table->foreignId('reward_id')->constrained('rewards')->onDelete('cascade');
+            $table->uuid('reward_id')->constrained('rewards')->onDelete('cascade');
             $table->timestamp('unlocked_at');
             $table->timestamps();
-
             $table->unique(['user_id', 'reward_id']);
             $table->foreign('user_id')->references('id')->on('recycling_users')->onDelete('cascade');
         });

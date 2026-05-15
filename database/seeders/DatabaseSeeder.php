@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
             WasteItemSeeder::class,
             CollectionPointSeeder::class,
             RewardSeeder::class,
+            AchievementsSeeder::class,
+            SubscriptionSeeder::class,
+            ChallengeSeeder::class,
         ]);
     }
 }

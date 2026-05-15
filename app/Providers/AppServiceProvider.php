@@ -37,6 +37,18 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(
             \Src\Recycling\RecycleAction\Infraestructure\Services\DependencyInversionServices::class
         );
+
+         $this->app->register(
+            \Src\Recycling\Social\Infraestructure\Services\DependencyInversionServices::class,
+        );
+
+        $this->app->register(
+            \Src\Recycling\Challenge\Infraestructure\Services\DependencyInversionServices::class,
+        );
+
+        $this->app->register(
+            \Src\Recycling\Leaderboard\Infraestructure\Services\DependencyInversionServices::class,
+        );
     }
 
     public function boot(): void {}

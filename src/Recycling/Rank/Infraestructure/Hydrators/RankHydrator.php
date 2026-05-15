@@ -16,9 +16,7 @@ use Src\Recycling\Rank\Infraestructure\Models\RankModel;
 
 class RankHydrator
 {
-    /**
-     * Convierte un RankModel de Eloquent a una entidad de dominio Rank.
-     */
+
     public static function toDomain(RankModel $model): Rank
     {
         return new Rank(

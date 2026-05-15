@@ -2,10 +2,12 @@ import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
 const NAV = [
-    { href: 'dashboard',           label: 'Inicio',             icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+    { href: 'dashboard',              label: 'Inicio',             icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
     { href: 'collection-points.index', label: 'Puntos de recogida', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
-    { href: 'profile.show',         label: 'Mi perfil',          icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
-    { href: 'rewards',              label: 'Recompensas',        icon: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7' },
+    { href: 'rewards',                label: 'Recompensas',        icon: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7' },
+    { href: 'leaderboard.index',      label: 'Ranking',         icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', premium: true },
+    { href: 'social.index',      label: ' Social',  icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z', premium: true },
+    { href: 'profile.show',           label: 'Mi perfil',          icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
 ];
 
 const LEVEL_COLORS: Record<string, string> = {
@@ -16,7 +18,7 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
     const { auth } = usePage().props as any;
     const user = auth.user;
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [dropOpen, setDropOpen] = useState(false);
+    const [dropOpen,   setDropOpen]   = useState(false);
     const currentRoute = route().current() ?? '';
     const lc = LEVEL_COLORS[user.level] ?? '#6b7c6d';
 
@@ -58,8 +60,7 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
                 .page-header { background: #fff; border-bottom: 1px solid #e8ebe6; }
                 .page-header-inner { max-width: 1280px; margin: 0 auto; padding: 1.1rem 1.5rem; }
                 .page-main { max-width: 1280px; margin: 0 auto; padding: 1.75rem 1.5rem; }
-                .footer{border-top:1px solid rgba(255,255,255,0.08);padding:1.5rem 2rem;text-align:center;font-size:13px;color:rgba(255,255,255,0.3);}
-                @keyframes spin { to { transform: rotate(360deg); } }
+                .footer { border-top: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 2rem; text-align: center; font-size: 13px; color: rgba(255,255,255,0.3); }
             `}</style>
 
             <nav className="navegador">
@@ -67,6 +68,7 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
                     <Link href={route('dashboard')} className="navegador-brand">
                         <div className="navegador-brand-dot">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a3a2a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                
                             </svg>
                         </div>
                         <span className="navegador-brand-name">Ecocycle</span>
@@ -75,7 +77,9 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
                     <div className="navegador-links">
                         {NAV.map(n => (
                             <Link key={n.href} href={route(n.href)} className={`navegador-link${currentRoute === n.href ? ' active' : ''}`}>
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={n.icon}/></svg>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d={n.icon}/>
+                                </svg>
                                 {n.label}
                             </Link>
                         ))}
@@ -93,7 +97,9 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
                             <button className="avatar-btn" onClick={() => setDropOpen(v => !v)}>
                                 <div className="avatar">{user.name?.charAt(0).toUpperCase()}</div>
                                 <span className="avatar-name">{user.name?.split(' ')[0]}</span>
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
                             </button>
                             {dropOpen && (
                                 <>
@@ -102,13 +108,19 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
                                         <div className="desplazabajo-email">{user.email}</div>
                                         <div className="desplazabajo-divider"/>
                                         <Link href={route('profile.show')} className="desplazabajo-item" onClick={() => setDropOpen(false)}>
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                                                <circle cx="12" cy="7" r="4"/>
+                                            </svg>
                                             Mi perfil
                                         </Link>
-                                        
                                         <div className="desplazabajo-divider"/>
-                                        <Link href={route('logout')} method="post" as="button" className="dropdown-item red" onClick={() => setDropOpen(false)}>
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                                        <Link href={route('logout')} method="post" as="button" className="desplazabajo-item red" onClick={() => setDropOpen(false)}>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                                                <polyline points="16 17 21 12 16 7"/>
+                                                <line x1="21" y1="12" x2="9" y2="12"/>
+                                            </svg>
                                             Cerrar sesión
                                         </Link>
                                     </div>
@@ -118,14 +130,22 @@ export default function AppLayout({ children, header }: PropsWithChildren<{ head
 
                         <button className="mob-btn" onClick={() => setMobileOpen(v => !v)}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                {mobileOpen ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></> : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>}
+                                {mobileOpen
+                                    ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
+                                    : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>
+                                }
                             </svg>
                         </button>
                     </div>
                 </div>
+
                 {mobileOpen && (
                     <div className="mob-menu">
-                        {NAV.map(n => <Link key={n.href} href={route(n.href)} className={`mob-link${currentRoute === n.href ? ' active' : ''}`} onClick={() => setMobileOpen(false)}>{n.label}</Link>)}
+                        {NAV.map(n => (
+                            <Link key={n.href} href={route(n.href)} className={`mob-link${currentRoute === n.href ? ' active' : ''}`} onClick={() => setMobileOpen(false)}>
+                                {n.label}
+                            </Link>
+                        ))}
                     </div>
                 )}
             </nav>

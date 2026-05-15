@@ -205,7 +205,6 @@ export default function CollectionPointsIndex({ collectionPoints }: Props) {
                 .filter-boton:hover { border-color: #2d6a4f; color: #2d6a4f; }
                 .filter-boton.on { background: #1a3a2a; color: #fff; border-color: #1a3a2a; }
 
-                /* lista */
                 .puntoreciclaje-list { display: flex; flex-direction: column; gap: 7px; max-height: calc(100vh - 260px); overflow-y: auto; padding-right: 2px; }
                 .puntoreciclaje-list::-webkit-scrollbar { width: 4px; }
                 .puntoreciclaje-list::-webkit-scrollbar-track { background: transparent; }
@@ -224,14 +223,13 @@ export default function CollectionPointsIndex({ collectionPoints }: Props) {
                 .cat-chip { font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 7px; display: inline-flex; align-items: center; gap: 2px; }
                 .no-results { padding: 2rem; text-align: center; color: #9ca3af; font-size: 14px; background: #fff; border-radius: 12px; border: 1px solid #e8ebe6; }
 
-                /* Map column */
                 .map-col { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 80px; }
                 .map-wrap { border-radius: 14px; overflow: hidden; border: 1px solid #e8ebe6; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
                 #puntoreciclaje-map { height: 440px; width: 100%; background: #e8f5e9; }
                 .map-loading { height: 440px; display: flex; align-items: center; justify-content: center; background: #f9faf8; color: #9ca3af; font-size: 14px; gap: 8px; }
                 @keyframes spin { to { transform: rotate(360deg); } }
 
-                /* panel */
+
                 .detalles-panel { background: #fff; border-radius: 14px; border: 1px solid #e8ebe6; overflow: hidden; transition: all 0.2s; }
                 .detalles-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid #f0f0ee; background: linear-gradient(135deg, #1a3a2a, #2d6a4f); }
                 .detalles-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: #fff; margin-bottom: 3px; }

@@ -1,0 +1,10 @@
+<?php
+
+namespace Src\Recycling\Challenge\Domain\ValueObjects;
+
+use Src\shared\Domain\ValueObjects\VOBInteger;
+
+class UserChallengeCurrentValue extends VOBInteger
+{
+
+}

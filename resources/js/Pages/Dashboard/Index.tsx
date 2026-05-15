@@ -170,21 +170,6 @@ export default function Dashboard({ auth, stats, recentActions, byCategory, week
                             })}
                         </div>
                     )}
-
-                    {/* actividad semanal falta por definir aun
-                    {weekActivity.length > 0 && (
-                        <div className="carta" style={{ padding: '1.1rem 1.25rem' }}>
-                            <div style={{ fontSize: 13, fontWeight: 600, color: '#1a3a2a', marginBottom: '0.75rem' }}>Esta semana</div>
-                            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 6, height: 60 }}>
-                                {weekActivity.map(d => (
-                                    <div key={d.date} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
-                                        <div title={`${d.points} pts`} style={{ width: '100%', background: '#52b788', borderRadius: '3px 3px 0 0', height: `${Math.round((d.points / maxWeekPts) * 52)}px`, minHeight: 4 }}/>
-                                        <span style={{ fontSize: 10, color: '#9ca3af' }}>{new Date(d.date).toLocaleDateString('es-ES', { weekday: 'narrow' })}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )} */}
                 </div>
             </div>
         </AppLayout>
