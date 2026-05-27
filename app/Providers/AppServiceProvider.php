@@ -10,45 +10,35 @@ class AppServiceProvider extends ServiceProvider
     {
   
         $this->app->register(
-            \Src\Recycling\Rank\Infraestructure\Services\DependencyInversionServices::class
+            \Src\BC\Rank\Infraestructure\Services\DependencyInversionServices::class
         );
 
         
         $this->app->register(
-            \Src\Recycling\User\Infraestructure\Services\DependencyInversionServices::class
+            \Src\BC\User\Infraestructure\Services\DependencyInversionServices::class
         );
 
         
         $this->app->register(
-            \Src\Recycling\User\Infraestructure\Services\AuthDependencyInversionServices::class
+            \Src\BC\User\Infraestructure\Services\AuthDependencyInversionServices::class
         );
 
         
         $this->app->register(
-            \Src\Recycling\CollectionPoint\Infraestructure\Services\DependencyInversionServices::class
+            \Src\BC\CollectionPoint\Infraestructure\Services\DependencyInversionServices::class
         );
 
         
         $this->app->register(
-            \Src\Recycling\WasteItem\Infraestructure\Services\DependencyInversionServices::class
+            \Src\BC\WasteItem\Infraestructure\Services\DependencyInversionServices::class
         );
 
         
         $this->app->register(
-            \Src\Recycling\RecycleAction\Infraestructure\Services\DependencyInversionServices::class
+            \Src\BC\RecycleAction\Infraestructure\Services\DependencyInversionServices::class
         );
 
-         $this->app->register(
-            \Src\Recycling\Social\Infraestructure\Services\DependencyInversionServices::class,
-        );
-
-        $this->app->register(
-            \Src\Recycling\Challenge\Infraestructure\Services\DependencyInversionServices::class,
-        );
-
-        $this->app->register(
-            \Src\Recycling\Leaderboard\Infraestructure\Services\DependencyInversionServices::class,
-        );
+        
     }
 
     public function boot(): void {}
