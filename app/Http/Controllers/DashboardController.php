@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
-use Src\Recycling\Rank\Application\Services\RankResolverService;
+use Src\BC\Rank\Application\Services\RankResolverService;
 
 class DashboardController extends Controller
 {
